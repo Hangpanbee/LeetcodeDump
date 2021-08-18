@@ -6,13 +6,13 @@ class UnionFind:
         # each component is of size 1
         self.size = [1] * (size + 1)
     
+    # path compression
     # find root node of p
     def find(self, p):
-        ans = p
-        if self.root[p] != p:
-            ans = self.find(self.root[p])
-        #after found the root node
-        return self.root[ans]
+        if p == self.root[p]:
+            return p
+        self.root[p] = self.find(self.root[p])
+        return self.root[p]
         
     def union(self, e1, e2):
         roote1 = self.find(e1)
