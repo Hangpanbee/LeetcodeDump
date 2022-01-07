@@ -14,8 +14,7 @@ class Solution:
                     backtrack(next_s, curr_pali+[curr_chopped])
             return None
         
-        backtrack(s, [])
-        #print(self.ans)   
+        backtrack(s, []) 
         return self.ans
         
         
