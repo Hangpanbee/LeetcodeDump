@@ -3,7 +3,7 @@ class Solution:
         self.moves = [[-2, 1], [-1, 2], [1, 2], [2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1]]
         self.memoize = {}
         self.onBoard = 0
-        self.allChoices = 8**k
+
 
         def backtrack(n, k, curr_row, curr_col, curr_move):
             if curr_move == k:
@@ -25,4 +25,4 @@ class Solution:
                 
             return self.memoize[(curr_row, curr_col, curr_move)]
         
-        return backtrack(n, k, row, column, 0)/self.allChoices
+        return backtrack(n, k, row, column, 0)/8**k
