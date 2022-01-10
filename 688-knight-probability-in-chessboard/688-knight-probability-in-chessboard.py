@@ -4,7 +4,7 @@ class Solution:
         self.memoize = {}
         self.onBoard = 0
 
-
+        @lru_cache(None)
         def backtrack(n, k, curr_row, curr_col, curr_move):
             if curr_move == k:
                 return 1
