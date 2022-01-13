@@ -29,7 +29,6 @@ class Solution:
             ans = float(inf)
             
             for choice in itertools.combinations(course_can_take, min(len(course_can_take),k_course) ):
-                #print(choice, indegree_1)
                 indegree = indegree_1.copy()
                 for course in choice:
                     indegree[course] -= 1
