@@ -15,10 +15,8 @@ class Solution:
                 window_sum -= data_list[l]
 
                 l += 1
-
             r += 1
 
-    
         return ans if ans != 99999999 else 0
                 
         
