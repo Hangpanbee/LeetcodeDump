@@ -1,7 +1,7 @@
 class Solution:
     def minOperations(self, nums: List[int]) -> int:
         l, r = 0, 0
-        nums.sort()
+        nums = sorted(nums)
         ans = 9999999999
         duplicate = 0
         while r < len(nums): 
