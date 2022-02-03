@@ -62,6 +62,7 @@ class MyLinkedList:
                 curr = curr.next
         
             curr.next = newNode
+            newNode.prev = curr
             self.size += 1
             
 
@@ -80,7 +81,9 @@ class MyLinkedList:
                 curr = curr.next
             
             addedNode.next = curr.next
+            addedNode.next.prev = addedNode
             curr.next = addedNode
+            addedNode.prev = curr
             
             self.size += 1
 
