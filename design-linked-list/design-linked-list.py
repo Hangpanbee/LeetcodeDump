@@ -2,6 +2,7 @@ class Node:
     def __init__(self, val):
         self.val = val
         self.next = None
+        self.pre = None
 
 class MyLinkedList:
 
@@ -40,6 +41,7 @@ class MyLinkedList:
             curr = self.head
             self.head = newNode
             newNode.next = curr
+            curr.prev = newNode
         self.size += 1
             
 
@@ -101,13 +103,7 @@ class MyLinkedList:
         
         self.size -= 1
         
-    def printAll(self):
-        
-        curr = self.head
-        print(curr.val)
-        while curr.next:
-            curr = curr.next
-            print(curr.val)
+
 
 
 # Your MyLinkedList object will be instantiated and called as such:
