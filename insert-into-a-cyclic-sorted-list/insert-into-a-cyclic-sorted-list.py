@@ -20,9 +20,6 @@ class Solution:
             not_a_pivot = head.val <= insertVal <= head.next.val
 
             if (pivot_start_pt or end_pivot_pt or not_a_pivot) or head.next == dummy:
-                print("start", pivot_start_pt)
-                print("end", end_pivot_pt)
-                print("not", not_a_pivot)
                 tmp = head.next
                 head.next = newNode
                 newNode.next = tmp
