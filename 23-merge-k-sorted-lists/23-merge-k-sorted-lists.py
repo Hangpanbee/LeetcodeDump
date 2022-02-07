@@ -7,12 +7,15 @@ class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         if len(lists) == 0: return 
         elif len(lists) == 1: return lists[0]
-
-        sorted_ll = self.merge_2_sorted_ll(lists[0], lists[1])
-        for i in range(2, len(lists)):
-            
-            sorted_ll = self.merge_2_sorted_ll(sorted_ll, lists[i])  
-        return sorted_ll
+        n = len(lists)
+        interval = 1
+        while interval < n:
+            for i in range(0, n-interval, interval*2):
+                lists[i] = self.merge_2_sorted_ll(lists[i], lists[i+interval])
+                
+            interval *= 2
+        
+        return lists[0] if n > 0 else None
         
     def merge_2_sorted_ll(self, l1, l2):
         if not l1: return l2
