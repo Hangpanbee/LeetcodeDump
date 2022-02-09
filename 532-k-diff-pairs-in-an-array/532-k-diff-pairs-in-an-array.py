@@ -10,9 +10,16 @@ class Solution:
             lower_target_num = num - k
             
             if upper_target_num in prev_num_tracker:
-                ans.add((min(upper_target_num, num), max(upper_target_num, num) ) )
+                if upper_target_num > num:
+                    ans.add((num, upper_target_num))
+                else:
+                    ans.add((upper_target_num, num))
+
             if lower_target_num in prev_num_tracker:
-                ans.add((min(lower_target_num, num), max(lower_target_num, num) ) )
+                if lower_target_num > num:
+                    ans.add((num, lower_target_num))
+                else:
+                    ans.add((lower_target_num, num))
             prev_num_tracker[num] = 1
           
         #print(prev_num_tracker)    
