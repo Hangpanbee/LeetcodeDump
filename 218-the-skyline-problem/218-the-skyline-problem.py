@@ -14,7 +14,7 @@ class Solution:
                 heapq.heappop(heap)
             
             if not heap: heapq.heappush(heap, (0, line_pos))
-            if heap and -heap[0][0] != ans[-1][1]: 
+            if -heap[0][0] != ans[-1][1]: 
                 ans.append([line_pos, -heap[0][0]])
          
    
