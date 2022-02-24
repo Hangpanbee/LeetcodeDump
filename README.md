@@ -1,0 +1,3 @@
+# LeetcodeDump
+
+An Algorithm Hobbyist.
