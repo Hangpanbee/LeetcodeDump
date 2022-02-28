@@ -28,9 +28,7 @@ class Solution:
             running_sum = 0
             curr_move = 1
             while running_sum < max_range and curr_move <= move:
-
-                old_sum = self.recursive_range(k-1, move-curr_move, max_range, memoize) + 1
-              
+                old_sum = self.recursive_range(k-1, move-curr_move, max_range, memoize) + 1   
                 running_sum += old_sum
                 curr_move += 1
             memoize[(k, move)] = running_sum
