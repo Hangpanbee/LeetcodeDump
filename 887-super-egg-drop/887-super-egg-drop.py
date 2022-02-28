@@ -3,11 +3,11 @@ class Solution:
         if k == 1: return n
         
         i_min, i_max = 0, self.twoEggDrop(n)+1
-      
+        memoize = {}
         i = 0
         while i_min < i_max:
             mid = i_min + (i_max - i_min)//2
-            max_range = self.recursive_range(k, mid, n)
+            max_range = self.recursive_range(k, mid, n, memoize)
 
             if max_range >= n:
                 i_max = mid
@@ -17,19 +17,23 @@ class Solution:
         
         return i_min
     
-    def recursive_range(self, k, move, max_range):
+    def recursive_range(self, k, move, max_range, memoize):
+        if (k, move) in memoize:
+            return memoize[(k, move)]
+        
         if k == 2:
-            return self.base_range(move, max_range)
+            memoize[(k, move)] = self.base_range(move, max_range)
+            return memoize[(k, move)]
         else:
             running_sum = 0
             curr_move = 1
             while running_sum < max_range and curr_move <= move:
 
-                old_sum = self.recursive_range(k-1, move-curr_move, max_range) + 1
+                old_sum = self.recursive_range(k-1, move-curr_move, max_range, memoize) + 1
               
                 running_sum += old_sum
                 curr_move += 1
-           
+            memoize[(k, move)] = running_sum
             return running_sum
                 
       
