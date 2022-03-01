@@ -1,8 +1,7 @@
 class Solution:
     def maxValue(self, events: List[List[int]], k: int) -> int:
-        ls = sorted(set([i  for d in events for i in {d[0]-1, d[1]}]))
         #print(ls)
-        events =[[d[0]-1, d[1], d[2]]  for d in events]
+
         events.sort()
  
         memoize = {}
@@ -14,7 +13,7 @@ class Solution:
             if (k, limit, curr_event) in memoize: return memoize[(k, limit, curr_event)]
             start, end, value = events[curr_event]
             take, notake = 0, 0
-            if limit <= start:
+            if limit <= start-1:
                 take = value + dp(k-1, end, curr_event+1)
                 
             
