@@ -5,7 +5,6 @@ class Solution:
         events.sort()
  
         memoize = {}
-        curr_event = 0
         @lru_cache(None)
         def dp(k, limit, curr_event):
             if k == 0: return 0
