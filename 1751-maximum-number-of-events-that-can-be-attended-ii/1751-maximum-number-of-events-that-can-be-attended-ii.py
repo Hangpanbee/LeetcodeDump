@@ -11,7 +11,7 @@ class Solution:
         def dp(k, limit, curr_event):
             if k == 0: return 0
             if curr_event >= len(events): return 0
-            
+            if (k, limit, curr_event) in memoize: return memoize[(k, limit, curr_event)]
             start, end, value = events[curr_event]
             take, notake = 0, 0
             if limit <= start:
