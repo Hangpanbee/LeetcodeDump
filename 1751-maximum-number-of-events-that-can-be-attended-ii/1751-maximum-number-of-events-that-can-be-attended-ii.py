@@ -16,9 +16,10 @@ class Solution:
             take, notake = 0, 0
             if limit <= start:
                 take = value + dp(k-1, end, curr_event+1)
+                
             
             notake = dp(k, limit, curr_event+1)
-            
+ 
             memoize[(k, limit, curr_event)] = max(take, notake)
            
             return memoize[(k, limit, curr_event)]
