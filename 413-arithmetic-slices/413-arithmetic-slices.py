@@ -2,7 +2,7 @@ class Solution:
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
         if len(nums) == 1: return 0
         
-        dp = [0] * len(nums)
+ 
         curr_diff = nums[1] - nums[0]
         l, r = 0, 1
         ans = 0
