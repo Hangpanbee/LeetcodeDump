@@ -3,7 +3,7 @@ class Solution:
         dp = [1,1,2,5] + [0] * (numPeople//2-3)
         if (numPeople // 2) <= 3: return dp[numPeople//2]
         pair = numPeople//2 
-        running_sum = 8
+
         for i in range(4, pair + 1):
             r = i
             for j in range((i+1)//2):
