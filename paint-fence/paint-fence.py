@@ -1,6 +1,6 @@
 class Solution:
     def numWays(self, n: int, k: int) -> int:
-        #if cur
+        if n < 3: return k**n
   
         same_color, diff_color = 0, k
         for i in range(1, n):
