@@ -5,14 +5,13 @@ class Solution:
         for i,car in enumerate(s):
             if car == '1': illegal_cars.append(i)
         if len(illegal_cars) == 0: return 0
-        min_move_left = -1
-        min_move_right = len(s)
+
         left_moves = [0]*len(illegal_cars)
         right_moves = [0]*len(illegal_cars)
         
         for i, v in enumerate(illegal_cars):
-            left_moves[i] = v - min_move_left 
-            right_moves[i] = min_move_right - v
+            left_moves[i] = v + 1
+            right_moves[i] = len(s) - v
             
         #take left
         for i, v in enumerate(left_moves):
