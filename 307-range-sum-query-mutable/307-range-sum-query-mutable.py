@@ -67,16 +67,15 @@ class NumArray:
             
             mid = root.left_index + (root.right_index - root.left_index)//2
 
-            left_val, right_val = 0, 0
+            #left_val, right_val = 0, 0
             if right <= mid:
-                left_val = traverse(root.left, left, right)
+                return traverse(root.left, left, right)
             elif left >= (mid+1):
-                right_val = traverse(root.right, left, right)
+                return traverse(root.right, left, right)
             else:
                 left_val = traverse(root.left, left, mid)
                 right_val = traverse(root.right, mid+1, right)
-            #print(left, right, left_val, right_val)
-            return left_val + right_val
+                return left_val + right_val
             
         return traverse(root, left, right)
 
