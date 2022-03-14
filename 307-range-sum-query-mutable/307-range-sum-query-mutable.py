@@ -35,7 +35,7 @@ class NumArray:
 
     def update(self, index: int, val: int) -> None:
         root = self.tree
-        
+        @lru_cache(None)
         def traverse(root, index, val):
             if not root: return 0
             
@@ -58,7 +58,7 @@ class NumArray:
 
     def sumRange(self, left: int, right: int) -> int:
         root = self.tree
-        
+        @lru_cache(None)
         def traverse(root, left, right):
             if not root: return 0
             if root.left_index == left and root.right_index == right:
