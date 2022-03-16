@@ -13,7 +13,7 @@ class Solution:
 
             return merge(left, right)
             
-            
+
         def merge(left, right):
             out = []
             l, r = 0, 0
