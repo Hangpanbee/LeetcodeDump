@@ -13,7 +13,7 @@ class Skiplist:
     def __init__(self):
         self.levels = []
         prev = None
-        for i in range(10):
+        for i in range(5):
             node = Node(-9999999999)
             self.levels.append(node)
             if prev:
