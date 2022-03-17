@@ -81,8 +81,6 @@ class DoubleLinkedList:
         newNode.LLprev = self.tail.LLprev
         self.tail.LLprev.LLnext = newNode
         self.tail.LLprev = newNode
-     
-
         return newNode
     
     def pop(self):
@@ -131,10 +129,8 @@ class MaxStack:
         
 
     def popMax(self) -> int:
-        maxVal = self.peekMax()
-        #print(maxVal)
+        maxVal = self.peekMax()   
         poppedNode = self.skipList.erase(maxVal)
-        #self.LLstack.print_ll()
         self.LLstack.unlink(poppedNode)
         return maxVal
 
