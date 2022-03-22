@@ -34,7 +34,7 @@ class Solution:
                 r = right[1]
             return (l, r)
         
-        dfs(root)
+        l, r = dfs(root)
     
         reverse = self.head
         while reverse.right:
@@ -43,4 +43,4 @@ class Solution:
         reverse.right = self.head
         self.head.left = reverse
         
-        return self.head
+        return l
