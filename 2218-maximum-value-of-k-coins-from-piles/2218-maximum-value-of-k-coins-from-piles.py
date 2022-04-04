@@ -1,14 +1,11 @@
 class Solution:
     def maxValueOfCoins(self, piles: List[List[int]], K: int) -> int:
-        dp = [[0] * K for i in range(len(piles))]
+
         
         for pile in range(len(piles)):
             for i in range(len(piles[pile])):
                 if i > 0:
                     piles[pile][i] += piles[pile][i-1]
-                if i < K:
-                    dp[pile][i] = piles[pile][i] 
-                    
         #print(piles, len(piles))
         @lru_cache(None)
         def dp(i, k):
