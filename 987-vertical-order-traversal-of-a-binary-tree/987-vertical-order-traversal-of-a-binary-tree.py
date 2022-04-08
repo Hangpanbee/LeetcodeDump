@@ -6,13 +6,11 @@
 #         self.right = right
 class Solution:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
-        mapColToNode = collections.defaultdict(list)
+
         mapColRowToNode = collections.defaultdict(list)
-        self.minCol = 9999999999
         def dfs(root, r, c):
             
             if not root: return
-            self.minCol = min(self.minCol, c)
 
             mapColRowToNode[(r, c)].append(root.val)
             
