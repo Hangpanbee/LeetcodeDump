@@ -1,32 +1,25 @@
 class Solution:
     def kthSmallest(self, mat: List[List[int]], k: int) -> int:
-        heap = []
-        m,n = len(mat), len(mat[0])
-        currSum = 0
-        ans = []
-        for r in range(m):
-            currSum += mat[r][0]
-        ans.append([currSum, [0]*m])
-        heap = []
-        heapq.heappush(heap, [currSum, [0]*m])
-        
-        i = 0
-        seen = {}
- 
-        while heap:
-            val, arr = heapq.heappop(heap)
-            if tuple(arr) in seen: continue
-            seen[tuple(arr)] = True
-            i+=1
-            #print(val, arr, i)
-            if i == k: return val
-            for r in range(m):
-                if arr[r] + 1 >= n: continue
-                arrCopy = arr.copy()
-                arrCopy[r] += 1
-                if tuple(arrCopy) in seen: continue
-                heapq.heappush(heap, [val - mat[r][arrCopy[r]-1] + mat[r][arrCopy[r]], arrCopy])
-                
-            
-           
-        return val
+        m, n = len(mat), len(mat[0])
+
+        def countArraysHaveSumLessOrEqual(targetSum, r, curSum, k):
+            if curSum > targetSum: return 0
+            if r == m: return 1  # found a valid array with sum <= targetSum
+            ans = 0
+            for c in range(n):
+                cnt = countArraysHaveSumLessOrEqual(targetSum, r + 1, curSum + mat[r][c], k - ans)
+                if cnt == 0: break  # prune, the array (which contains mat[r][c]) has sum > targetSum -> No need to process anymore
+                ans += cnt
+                if ans > k: break  # Important prune, since count > k -> No need to process anymore
+            return ans
+
+        left, right, ans = m, m * 5000, -1
+        while left <= right:
+            mid = left + (right - left) // 2
+            cnt = countArraysHaveSumLessOrEqual(mid, 0, 0, k)
+            if cnt >= k:
+                ans = mid
+                right = mid - 1
+            else:
+                left = mid + 1
+        return ans
