@@ -10,7 +10,6 @@ class Solution:
                 maxBranchDia = 0
                 maxBranchHeight = 0
                 secondMaxBranchHeight = 0
-                branchHeight = []
             
                 for child in tree[root]:
                     aBranchDia, aBranchHeight = helper(child)
