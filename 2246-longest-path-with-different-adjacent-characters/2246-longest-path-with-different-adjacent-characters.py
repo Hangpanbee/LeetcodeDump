@@ -4,7 +4,8 @@ class Solution:
         tree = collections.defaultdict(list)
         for i,v in enumerate(parent):
             tree[v].append(i)
-
+        
+        @lru_cache(None)
         def helper(root):
             if tree[root]:          
                 maxBranchDia = 0
