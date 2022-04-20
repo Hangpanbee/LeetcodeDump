@@ -14,7 +14,7 @@ class BSTIterator:
             self.tree.append(root)
             dfs(root.right)
         dfs(root)
-        print(self.tree)
+        #print(self.tree)
         self.nextPointer = -1
 
     def next(self) -> int:
