@@ -1,18 +1,22 @@
 class Solution:
     def swimInWater(self, grid: List[List[int]]) -> int:
-        N = len(grid)
-
-        seen = {(0, 0)}
-        pq = [(grid[0][0], 0, 0)]
-        ans = 0
-        while pq:
-            d, r, c = heapq.heappop(pq)
-            ans = max(ans, d)
-            if r == c == N-1: return ans
-            for cr, cc in ((r-1, c), (r+1, c), (r, c-1), (r, c+1)):
-                if 0 <= cr < N and 0 <= cc < N and (cr, cc) not in seen:
-                    heapq.heappush(pq, (grid[cr][cc], cr, cc))
-                    seen.add((cr, cc))
-                
-            
+        n = len(grid)
+        heap = []
+        heapq.heappush(heap, (grid[0][0], 0, 0, {(0,0)}))
         
+      
+        while heap:
+            #print(heap)
+            a = heapq.heappop(heap)
+            h, r, c, visited = a
+            if (r, c) == (n-1, n-1): return h
+            #print(r, c, visited)
+           
+            for newR, newC in [(r+1, c), (r-1, c), (r, c+1), (r, c-1)]:
+                
+                if 0 <= newR < n and 0 <= newC < n and (newR, newC) not in visited:
+                    #visitedCopy = visited.copy()
+                    visited.add((newR, newC))
+                    #print(max(grid[newR][newC], h), newR, newC, visitedCopy)
+                    heapq.heappush(heap, (max(grid[newR][newC], h), newR, newC, visited))
+                  
