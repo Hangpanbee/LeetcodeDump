@@ -18,5 +18,7 @@ class Solution:
                     #visitedCopy = visited.copy()
                     visited.add((newR, newC))
                     #print(max(grid[newR][newC], h), newR, newC, visitedCopy)
+                    # why this question does not need a copy of visited?
+                    # because it is greedy?
                     heapq.heappush(heap, (max(grid[newR][newC], h), newR, newC, visited))
                   
