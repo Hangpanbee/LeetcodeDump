@@ -4,8 +4,8 @@ class Solution:
         if n == 1: return grid[0][0]
         startHeap = []
         endHeap = []
-        sVisited = {(0,0): 0}
-        eVisited = {(n-1, n-1): 0}
+        sVisited = {(0,0): grid[0][0]}
+        eVisited = {(n-1, n-1): grid[n-1][n-1]}
         heapq.heappush(startHeap, (grid[0][0], 0, 0))
         heapq.heappush(endHeap, (grid[n-1][n-1], n-1, n-1))
         
@@ -21,6 +21,7 @@ class Solution:
                         #print(eVisited, "eVisited")
                         #print(sVisited)
                         return max(sVal, eVisited[(newSR, newSC)])
+                    #sVisited[(sR, sC)] = max(grid[newSR][newSC], sVal)
                     heapq.heappush(startHeap, (max(grid[newSR][newSC], sVal), newSR, newSC))
             
             eVal, eR, eC = heapq.heappop(endHeap)
@@ -33,6 +34,7 @@ class Solution:
                     if (newER, newEC) in sVisited: 
     
                         return max(sVisited[(newER, newEC)], eVal)
+
                     heapq.heappush(endHeap, (max(grid[newER][newEC], eVal), newER, newEC))
                     
                     
