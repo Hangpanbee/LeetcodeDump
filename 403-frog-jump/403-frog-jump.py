@@ -7,6 +7,10 @@ class Solution:
         sQ.append((0, 0))
         eQ.append((stones[-1], stones[-1] - stones[-2]))
         GOAL = stones[-1]
+        stonesMap = {}
+        for i, v in enumerate(stones):
+            stonesMap[v] = i
+        
         
         while sQ and eQ:
             pos, units = sQ.popleft()
@@ -16,7 +20,7 @@ class Solution:
                 nextPos = pos + nextUnits
                 #print(nextPos in stones, sV, nextUnits)
                 if (nextUnits, nextPos) in sV: continue
-                if (nextPos) in stones and  0 <= pos < (pos+nextUnits) :
+                if 0 <= pos < (pos+nextUnits) and (nextPos) in stonesMap:
                     sQ.append((pos+nextUnits, nextUnits))
                     if nextPos == GOAL: return True
                     if (nextUnits, nextPos) in eV: return True
@@ -26,7 +30,7 @@ class Solution:
             for nextRUnits in [(rUnits+1), (rUnits), (rUnits-1)]:
                 nextRPos = rPos - nextRUnits
                 if (nextRUnits, nextRPos) in eV: continue
-                if nextRPos >= 0 and nextRPos in stones:
+                if nextRPos >= 0 and nextRPos in stonesMap:
                     eQ.append((nextRPos, nextRUnits))
                     if (nextRUnits, nextRPos) in sV: return True
                     eV[(nextRUnits, nextRPos)] = True
