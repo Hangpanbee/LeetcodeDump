@@ -7,11 +7,13 @@ class Solution:
         dp2 = {}
         while q:
             pos, speed, count = q.popleft()
-         
+            
             reverseSpeed = -1 if speed >= 0 else 1
             for nextPos, nextSpeed, nextCount in [(pos+speed, speed*2, count+1), (pos, reverseSpeed, count+1)]:
                 if (nextPos, nextSpeed) in dp: continue
+                if abs(target-nextPos) > target: continue
                 q.append((nextPos, nextSpeed, nextCount))
                 if nextPos == target: return nextCount
+                dp2[nextPos] = nextCount
                 dp[(nextPos, nextSpeed)] = (nextCount)
            
