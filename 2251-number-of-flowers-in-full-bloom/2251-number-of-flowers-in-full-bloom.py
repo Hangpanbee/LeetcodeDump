@@ -18,13 +18,13 @@ class Solution:
                 i+=1
                 
             while pI < len(persons) and tl == persons[pI][0]:
-                #print(activeHeap, pI, tl, len(activeHeap))
+   
                 time, index = persons[pI]
-                #print(time, index)
+      
                 ans[index] = len(activeHeap)
-                #print(ans)
+
                 pI += 1
-            #print(tl, activeHeap)   
+  
             while activeHeap and tl == activeHeap[0][0]:
                 heapq.heappop(activeHeap)
         
