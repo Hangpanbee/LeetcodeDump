@@ -4,7 +4,7 @@ class Solution {
         int n = heights[0].length;
         PriorityQueue<nodePath> q = new PriorityQueue<>((n1, n2) -> n1.maxDiff - n2.maxDiff);
         nodePath node = new nodePath(0, 0, 0);
-        q.add(node);
+        q.offer(node);
         HashSet<Pair<Integer, Integer>> visited = new HashSet<>();
         visited.add(new Pair<Integer, Integer> (0, 0));
         int dirs[][] = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
@@ -24,7 +24,7 @@ class Solution {
                 int currMaxDiff = heights[newR][newC] - heights[curr.r][curr.c];
                 nodePath nextPath = new nodePath(Math.max(Math.abs(heights[newR][newC] - heights[curr.r][curr.c]), curr.maxDiff), newR, newC);
                 
-                q.add(nextPath);
+                q.offer(nextPath);
             }
             
         };
