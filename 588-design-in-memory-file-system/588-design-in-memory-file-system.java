@@ -1,11 +1,12 @@
 class TrieNode {
-    public String content;
+    public StringBuilder content;
     public TreeMap<String, TrieNode> children;
     public String fileName;
     public boolean isDirectory;
     public TrieNode(String fileName, String content) {
         this.fileName = fileName;
-        this.content = content;
+        this.content = new StringBuilder();
+        this.content.append(content);
         this.isDirectory = false;
     };
     public TrieNode(String fileName, TreeMap children) {
@@ -48,7 +49,7 @@ class Trie {
         if (curr.isDirectory) {
             curr.children.put(pathSplit[i], new TrieNode(pathSplit[i], content));
         } else {
-            curr.content += content;
+            curr.content.append(content);
         };
     };
     
@@ -110,7 +111,7 @@ class FileSystem {
         String[] pathSplit = filePath.split("/");
         Pair<TrieNode, Integer> pair = root.traverse(pathSplit);
         
-        return pair.getKey().content;
+        return pair.getKey().content.toString();
     }
 }
 
