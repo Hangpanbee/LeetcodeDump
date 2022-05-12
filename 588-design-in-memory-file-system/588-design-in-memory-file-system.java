@@ -1,6 +1,6 @@
 class TrieNode {
     public String content;
-    public HashMap<String, TrieNode> children;
+    public TreeMap<String, TrieNode> children;
     public String fileName;
     public boolean isDirectory;
     public TrieNode(String fileName, String content) {
@@ -8,7 +8,7 @@ class TrieNode {
         this.content = content;
         this.isDirectory = false;
     };
-    public TrieNode(String fileName, HashMap children) {
+    public TrieNode(String fileName, TreeMap children) {
         this.fileName = fileName;
         this.children = children;
         this.isDirectory = true;
@@ -23,7 +23,7 @@ class Trie {
         root = new TrieNode();
         root.fileName = "root";
         root.isDirectory = true;
-        root.children = new HashMap<String, TrieNode>();
+        root.children = new TreeMap<String, TrieNode>();
     }
     
     public void create(String path) {
@@ -33,7 +33,7 @@ class Trie {
         TrieNode curr = pair.getKey();
         
         for (; i < pathSplit.length; i++) {
-            TrieNode nextNode = new TrieNode(pathSplit[i], new HashMap<String, TrieNode>());
+            TrieNode nextNode = new TrieNode(pathSplit[i], new TreeMap<String, TrieNode>());
             curr.children.put(pathSplit[i], nextNode);
             curr = nextNode;
         };        
@@ -89,7 +89,7 @@ class FileSystem {
                 ans.add(entry.getKey());
                 
             };
-            Collections.sort(ans);
+            //Collections.sort(ans);
         } else {
             ans.add(curr.fileName);
         };
