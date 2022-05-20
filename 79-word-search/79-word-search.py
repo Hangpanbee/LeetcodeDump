@@ -3,10 +3,9 @@ class Solution:
         
         m, n = len(board), len(board[0])
         
-        
+
         def dfs(r, c, i, seen):
             if i == len(word): return True
-            
             
             for (dr, dc) in [(r+1, c), (r-1, c), (r, c+1), (r, c-1)]:
                 if 0 <= dr < m and 0 <= dc < n and board[dr][dc] == word[i] and (dr, dc) not in seen:
