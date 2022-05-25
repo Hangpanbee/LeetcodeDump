@@ -9,8 +9,10 @@ class Solution:
         
         
         def helper(root, sumLeft, isLeft):
-            if not root:
+            if not root and isLeft:
                 return sumLeft
+            elif not root and not isLeft:
+                return 0
             
             if isLeft and not root.left and not root.right:
                 sumLeft += root.val
@@ -18,4 +20,4 @@ class Solution:
                 
             return helper(root.left, sumLeft, True) + helper(root.right, sumLeft, False)
         
-        return helper(root, 0, False)//2
+        return helper(root, 0, False)
