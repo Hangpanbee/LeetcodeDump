@@ -10,7 +10,7 @@ class Solution:
         [24:00]
         """
         toInt = lambda x: int(x)
-        
+        toMin = lambda x: x[:2]*24 + x[2:]
         zeroTP = []
         twentyFrTP = []
         for i, timepoint in enumerate(timePoints):
