@@ -5,18 +5,13 @@ class Solution:
         runtime: 
         """
         
-        mapLenToStrs = collections.defaultdict(list)
-        for i, string in enumerate(strs):
-            mapLenToStrs[len(string)].append(string)
-        
         mapHashToGroup = collections.defaultdict(list)
+        for i, s in enumerate(strs):
+            hashValue = self.calHash(s)
+            mapHashToGroup[hashValue].append(s)            
         
-        for strLen, string in mapLenToStrs.items():
-            for s in string:
-                hashValue = self.calHash(s)
-                mapHashToGroup[hashValue].append(s)
-                #print(hashValue)
-        #print(mapHashToGroup)
+        
+        
         return mapHashToGroup.values()
     
     def calHash(self, string):
