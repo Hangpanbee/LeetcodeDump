@@ -1,7 +1,8 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         """
-        are the words unique
+        are the words unique?
+        runtime: 
         """
         
         mapLenToStrs = collections.defaultdict(list)
@@ -13,7 +14,7 @@ class Solution:
         for strLen, string in mapLenToStrs.items():
             for s in string:
                 hashValue = self.calHash(s)
-                mapHashToGroup[(hashValue, strLen)].append(s)
+                mapHashToGroup[hashValue].append(s)
                 #print(hashValue)
         #print(mapHashToGroup)
         return mapHashToGroup.values()
