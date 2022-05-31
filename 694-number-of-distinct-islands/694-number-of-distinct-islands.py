@@ -31,7 +31,7 @@ class Solution:
                     if path in seenIsland:
                         numOfDIsland -= 1
                     seenIsland[path] = True
-        print(len(seenIsland))
+        #print(len(seenIsland))
         return numOfDIsland
     
  
