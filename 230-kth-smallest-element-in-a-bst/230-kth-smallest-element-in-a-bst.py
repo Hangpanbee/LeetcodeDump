@@ -16,10 +16,9 @@ class Solution:
             
             currSmaller = 1 + leftCount
             foundK = kVal or leftKval
-            #print(currSmaller )
+  
             if currSmaller == k:
                 foundK = root.val
-            #print(foundK)
             right = inorder(root.right, currSmaller, foundK)
             
             #print(right)
