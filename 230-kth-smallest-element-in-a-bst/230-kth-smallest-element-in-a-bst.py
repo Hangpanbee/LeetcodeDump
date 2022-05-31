@@ -13,15 +13,12 @@ class Solution:
             if not root: return (smallerCount, kVal)
             
             leftCount, leftKval = inorder(root.left, smallerCount, kVal)
-            
             currSmaller = 1 + leftCount
             foundK = kVal or leftKval
   
             if currSmaller == k:
-                foundK = root.val
-            right = inorder(root.right, currSmaller, foundK)
-            
-            #print(right)
-            return right
+                return (currSmaller, root.val)
+            return inorder(root.right, currSmaller, foundK)
+        
         
         return inorder(root, 0, None)[1]
