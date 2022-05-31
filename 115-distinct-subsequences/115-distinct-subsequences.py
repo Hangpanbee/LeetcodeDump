@@ -10,6 +10,7 @@ class Solution:
                 return 1
             elif i == m:
                 return 0
+            elif m - i < n - j: return 0
             elif (i, j) in memoize:
                 return memoize[(i, j)]
     
