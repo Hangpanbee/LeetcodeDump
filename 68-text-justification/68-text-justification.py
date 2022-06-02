@@ -48,7 +48,7 @@ class Solution:
                 justifiedLine.append(word)
                 if spaces > 0: justifiedLine.append(" ")
                 spaces -= 1
-            print(spaces)
+     
             if spaces > 0:
                 justifiedLine.append(" "*spaces)
             
