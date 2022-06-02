@@ -15,5 +15,5 @@ class Solution:
                 dp[j] = dp[j] or dp[j-num]
             #print(dp, num)
     
-        print(dp)
+        #print(dp)
         return dp[-1] 
