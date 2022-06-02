@@ -62,10 +62,9 @@ class Solution:
             text.append(currWordsInLine)
             i = nxtI
         
-        
+        # -> o(n) n == the number of words in the original list
         for line in range(len(text)-1):
             text[line] = evenJustify(text[line])
         
         text[-1] = leftJustify(text[-1])
-        #print(len(text[-1]))
         return text
