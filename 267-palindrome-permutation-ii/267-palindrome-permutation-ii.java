@@ -18,8 +18,7 @@ class Solution {
             }
         }
         
-        buildPaliRoot(mapCharToFreq, new StringBuilder());
-        //System.out.println(oddPali);
+        buildPaliRoot(mapCharToFreq, new char[maxPaliRoot], 0);
         //List<String> paliPerm = new ArrayList<>();
 
         
@@ -29,18 +28,18 @@ class Solution {
         
     }
     
-    public void buildPaliRoot(Map<Character, Integer> mapCharToFreq, StringBuilder path) {
-        if (path.length() == maxPaliRoot) {
+    public void buildPaliRoot(Map<Character, Integer> mapCharToFreq, char[] path, int i) {
+        if (i == maxPaliRoot) {
             paliRoots.add(new String(path) + (oddPali == 0 ? "" : oddPali) + new StringBuffer(new String(path)).reverse());
-        } else if (path.length() > maxPaliRoot) {
+        } else if (i > maxPaliRoot) {
             return ;
         }
         
         for (Map.Entry<Character, Integer> e: mapCharToFreq.entrySet()) {
             if (e.getValue() == 0) continue;
             mapCharToFreq.put(e.getKey(), e.getValue()-1);
-            buildPaliRoot(mapCharToFreq, path.append(e.getKey()));
-            path.delete(path.length()-1, path.length());
+            path[i] = e.getKey();
+            buildPaliRoot(mapCharToFreq, path, i+1);
             mapCharToFreq.put(e.getKey(), e.getValue()+1);
             
         }
