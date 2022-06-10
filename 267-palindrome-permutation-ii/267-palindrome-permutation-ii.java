@@ -1,13 +1,14 @@
 class Solution {
     int maxPaliRoot;
     List<String> paliRoots;
+    char oddPali;
     public List<String> generatePalindromes(String s) {
         Map<Character, Integer> mapCharToFreq = buildMapCharToFreq(s);
         if (!isValidPali(mapCharToFreq)) return new ArrayList<>();
         
         maxPaliRoot = s.length()/2;
         paliRoots = new ArrayList<String>();
-        char oddPali = 0;
+        oddPali = 0;
         for (Map.Entry<Character, Integer> e: mapCharToFreq.entrySet()) {
             if (e.getValue()%2==1) {
                 oddPali = e.getKey();
@@ -19,12 +20,10 @@ class Solution {
         
         buildPaliRoot(mapCharToFreq, new StringBuilder());
         //System.out.println(oddPali);
-        List<String> paliPerm = new ArrayList<>();
-        for (String paliRoot: paliRoots) {
-            paliPerm.add(new String(paliRoot) + (oddPali == 0 ? "" : oddPali) + new StringBuffer(new String(paliRoot)).reverse());
-        }
+        //List<String> paliPerm = new ArrayList<>();
+
         
-        return paliPerm;
+        return paliRoots;
         
         
         
@@ -32,7 +31,7 @@ class Solution {
     
     public void buildPaliRoot(Map<Character, Integer> mapCharToFreq, StringBuilder path) {
         if (path.length() == maxPaliRoot) {
-            paliRoots.add(path.toString());
+            paliRoots.add(new String(path) + (oddPali == 0 ? "" : oddPali) + new StringBuffer(new String(path)).reverse());
         } else if (path.length() > maxPaliRoot) {
             return ;
         }
