@@ -1,43 +1,40 @@
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
         
-        Stack<Integer> s = new Stack<>();
+        Deque<Integer> s = new ArrayDeque<>();
         
         for (int a: asteroids) {
             // a = -2
             // a = -1
             // a = 1
             // a = -2
-            if (s.isEmpty() || s.peek() < 0 && a > 0 || s.peek()*a > 0 ) {
-                s.add(a);
+            if (s.isEmpty() || s.peekLast() < 0 && a > 0 || s.peekLast()*a > 0 ) {
+                s.offerLast(a);
                 // s = [-2, -1, 1]
             } else {
-                while (!s.isEmpty() && s.peek()*a < 0 && Math.abs(s.peek()) < Math.abs(a)) {
-                    s.pop();
+                while (!s.isEmpty() && s.peekLast()*a < 0 && Math.abs(s.peekLast()) < Math.abs(a)) {
+                    s.pollLast();
                 }
                 // at this state, aster stak only has abs value that is smaller than a or empty
                 if (s.isEmpty()) {
-                    s.add(a);
-                } else if (s.peek()*a > 0) {
+                    s.offerLast(a);
+                } else if (s.peekLast()*a > 0) {
                     // same direction
-                    s.add(a);
-                } else if (s.peek() < 0 && a > 0) {
+                    s.offerLast(a);
+                } else if (s.peekLast() < 0 && a > 0) {
                     // opposite (l, r) but doesn't meet direction
-                    s.add(a);
-                } else if (s.peek() == a*(-1)) {
+                    s.offerLast(a);
+                } else if (s.peekLast() == a*(-1)) {
                     // opposite (r, l) but does meet
-                    s.pop();
+                    s.pollLast();
                 }
                 
                 
             }
-            
-        
         }
-        
         int[] ans = new int[s.size()];
-        for (int t = ans.length-1; t >= 0; t--) {
-            ans[t] = s.pop();
+        for (int t = 0; t < ans.length; t++) {
+            ans[t] = s.pollFirst();
         }
         
         return ans;
