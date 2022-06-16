@@ -14,20 +14,39 @@
  * }
  */
 class Solution {
-    
-    List<Integer> answerList = new LinkedList<Integer>();
-    
-    
     public List<Integer> inorderTraversal(TreeNode root) {
-        
-        if (root != null) {
-            
-            inorderTraversal(root.left);
-            answerList.add(root.val);
-           
-            inorderTraversal(root.right);
-            
+        TreeNode curr = root;
+        // curr = 1
+        List<Integer> ans = new LinkedList<>();
+        while (curr != null) {
+            if (curr.left == null) {
+                ans.add(curr.val);
+                // ans = [1]
+                curr = curr.right;
+                // curr = 2
+            } else {
+                TreeNode prev = curr.left;
+                // prev = 3
+                while (prev.right != null && prev.right != curr) {
+                    prev = prev.right;
+                }
+                
+                if (prev.right == null) {
+                    prev.right = curr;
+                    // prev.right = 2
+                    curr = curr.left;
+                    // curr = 3
+                } else {
+                    prev.right = null;
+                    ans.add(curr.val);
+                    curr = curr.right;
+                }
+                
+                
+            }
         }
-        return answerList;
+        
+        return ans;
+        
     }
 }
