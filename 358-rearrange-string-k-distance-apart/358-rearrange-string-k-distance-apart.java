@@ -31,7 +31,7 @@ class Solution {
             char c = (char) curr[1];
             
             while (curr[0] > 0) {
-                if (bucket[0].length() == 0 ||
+                if (bucket[0].length() > 0 &&
                     i == (bucketCount-1) && bucket[0].charAt(bucket[0].length()-1) != c) {
                     i = 0;
                 }                 
