@@ -1,36 +1,39 @@
-import random
+from random import choice
 
 class RandomizedSet:
 
     def __init__(self):
         self.seen = {}
-        self.indexToVal = {}
+        self.valArr = []
         self.currIndex = 0
 
     def insert(self, val: int) -> bool:
         if val in self.seen: return False
         else: 
-            self.seen[val] = self.currIndex
-            self.indexToVal[self.currIndex] = val
-            self.currIndex+=1
+            self.seen[val] = len(self.valArr)
+            self.valArr.append(val)
             return True
 
     def remove(self, val: int) -> bool:
+        """
+        can delete by swapping the value to the tail
+        """
         if val in self.seen:
             valIndex = self.seen[val]
+            lastEle = self.valArr[-1]
+            self.seen[lastEle] = valIndex
+            self.valArr[valIndex], self.valArr[-1] = lastEle, self.valArr[valIndex]
+            
             del self.seen[val]
-            del self.indexToVal[valIndex]
+            self.valArr.pop()
             return True
         else:
             return False
 
     def getRandom(self) -> int:
-        rand = random.randrange(0, self.currIndex)
+        #rand = random.randrange(0, len(self.valArr))
         
-        while (rand not in self.indexToVal):
-            rand = random.randrange(0, self.currIndex)
-        
-        return self.indexToVal[rand]
+        return choice(self.valArr)
         
         
 
