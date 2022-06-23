@@ -1,8 +1,8 @@
 class TwoSum {
     // twoSum(2) twoSum(2) -> find(4)
-    TreeMap<Integer, Integer> twoSum;
+    HashMap<Integer, Integer> twoSum;
     public TwoSum() {
-        twoSum = new TreeMap<>();
+        twoSum = new HashMap<>();
     }
     
     public void add(int number) {
@@ -16,7 +16,6 @@ class TwoSum {
             
             if (target == m.getKey()) {
                 if (twoSum.get(target) >= 2) return true;
-                else return false;
             } else if (twoSum.containsKey(target))
                 return true;
         }
