@@ -6,7 +6,7 @@ class Solution:
 
 
         for bar in range(len(height)):
-            
+            #decreasing stack
             while mono_stack and height[bar] > height[mono_stack[-1]]:
                 poppedBarIndex = mono_stack.pop()
                 poppedBar = height[poppedBarIndex]
