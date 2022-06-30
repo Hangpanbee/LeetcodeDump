@@ -11,7 +11,7 @@ class Solution:
         for i, file in enumerate(splittedInput):
             fileSplitted = file.split("\t")
             fileName, fileLevel = fileSplitted[-1], len(fileSplitted)
-            isTextFile = len(file.split(".")) > 1
+            isTextFile = "." in fileName
             pathLen = len(fileName)
             while st and st[-1][1] >= fileLevel:
                 st.pop()
