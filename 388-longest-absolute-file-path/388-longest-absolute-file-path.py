@@ -1,6 +1,6 @@
 class Solution:
     def lengthLongestPath(self, input: str) -> int:
-        input = input.replace(" ", "_")
+        #input = input.replace(" ", "_")
       
         splittedInput = input.split("\n")
         #print(len(splittedInput[-1]))
