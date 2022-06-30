@@ -18,7 +18,6 @@ class Solution:
                 else:
                     prefixRange[indice] = 1
                     prefixRange[indice+len(source)-1] = -1
-                
                 appendRange[indice] = target
         
         replacedString = []
