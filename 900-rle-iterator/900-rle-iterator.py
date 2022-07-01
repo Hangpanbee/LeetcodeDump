@@ -11,17 +11,19 @@ class RLEIterator:
             runningSum += encoding[i]
             self.encoding.append((runningSum, encoding[i+1]))
         self.iterator = 0
+        self.lBoundary = 0
 
     def next(self, n: int) -> int:
         self.iterator += n
         # self.i = 4
-        targetI = self.__binarySearch(self.iterator)
+        targetI = self.__binarySearch(self.iterator, self.lBoundary)
+        self.lBoundary = targetI
         if targetI >= len(self.encoding):
             return -1
         else: return self.encoding[targetI][1]
     
-    def __binarySearch(self, target) -> int:
-        l, r = 0, len(self.encoding)
+    def __binarySearch(self, target, l) -> int:
+        r = len(self.encoding)
         
         while l < r:
             mid = l + (r-l)//2
