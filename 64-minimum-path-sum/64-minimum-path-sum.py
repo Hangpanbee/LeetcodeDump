@@ -5,20 +5,14 @@ class Solution:
         why dp does work here?
         why need a visisted set here?
         """
-        heap = []
-        heapq.heappush(heap, (grid[0][0], 0,0) )
-        visited = {}
-        visited[(0,0)] = True
+        dp = [[0]*n for _ in range(m)]
         
-        while heap:
-            pathSum, currR, currC = heapq.heappop(heap)
-            if (currR, currC) == (m-1, n-1):
-                return pathSum 
-            
-            for nxtR, nxtC in ((currR+1, currC), (currR, currC+1)):
-                if 0 <= nxtR < m and 0 <= nxtC < n and (nxtR, nxtC) not in visited:
-                    visited[(nxtR, nxtC)] = True
-                    heapq.heappush(heap, (pathSum+grid[nxtR][nxtC], nxtR, nxtC))
-                    
+        for r in range(m):
+            for c in range(n):
+                if (r, c) == (0,0): continue
+                right = float(inf) if c-1 < 0 else grid[r][c-1]
+                down = float(inf) if r-1 < 0 else grid[r-1][c]
+                grid[r][c] += min(right, down)
         
-        return -1
+        #print(grid)
+        return grid[m-1][n-1]
