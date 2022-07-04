@@ -18,19 +18,19 @@ class StockPrice:
         return self.stock[self.latest]
         
     def maximum(self) -> int:
-        currMaxPrice, currTS = heapq.heappop(self.streamingMax)
+        currMaxPrice, currTS = self.streamingMax[0]
         #print(self.stock, currTS, self.streamingMax)
         while self.stock[currTS] != -currMaxPrice:
-            currMaxPrice, currTS = heapq.heappop(self.streamingMax)
-        heapq.heappush(self.streamingMax, (currMaxPrice, currTS))
+            heapq.heappop(self.streamingMax)
+            currMaxPrice, currTS = self.streamingMax[0]
         return currMaxPrice*(-1)
         
 
     def minimum(self) -> int:
-        currMinPrice, currTS = heapq.heappop(self.streamingMin)
+        currMinPrice, currTS = self.streamingMin[0]
         while self.stock[currTS] != currMinPrice:
-            currMinPrice, currTS = heapq.heappop(self.streamingMin)
-        heapq.heappush(self.streamingMin, (currMinPrice, currTS))
+            heapq.heappop(self.streamingMin)
+            currMinPrice, currTS = self.streamingMin[0]
         return currMinPrice
 
 # Your StockPrice object will be instantiated and called as such:
