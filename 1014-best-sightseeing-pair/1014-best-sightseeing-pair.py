@@ -1,7 +1,6 @@
 class Solution:
     def maxScoreSightseeingPair(self, values: List[int]) -> int:
         forward = [0]*len(values)
-        backward = [0]*len(values)
         
         """
             [8, 1, 5, 2, 6]
