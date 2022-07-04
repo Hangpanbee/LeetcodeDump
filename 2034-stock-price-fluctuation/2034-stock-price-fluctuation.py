@@ -4,20 +4,18 @@ class StockPrice:
         self.streamingMin = []
         self.streamingMax = []
         self.stock = {}
-        self.latest = []
+        self.latest = 0
 
     def update(self, timestamp: int, price: int) -> None:
         heapq.heappush(self.streamingMin, (price, timestamp))
         heapq.heappush(self.streamingMax, (-price, timestamp))
-        heapq.heappush(self.latest, -timestamp)
         self.stock[timestamp] = price
+        self.latest = max(self.latest, timestamp)
     
     
 
     def current(self) -> int:
-        currTS = heapq.heappop(self.latest)
-        heapq.heappush(self.latest, currTS)
-        return self.stock[-currTS]
+        return self.stock[self.latest]
         
     def maximum(self) -> int:
         currMaxPrice, currTS = heapq.heappop(self.streamingMax)
