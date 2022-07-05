@@ -4,7 +4,7 @@ class SummaryRanges:
         self.intervals = []        
 
     def addNum(self, val: int) -> None:
-        vali = bisect.bisect_right(self.intervals, val)
+        vali = bisect.bisect_left(self.intervals, val)
 
         if vali%2 == 1: pass
         else:
@@ -28,10 +28,7 @@ class SummaryRanges:
 
     def getIntervals(self) -> List[List[int]]:
         intervals = []
-        #print(self.intervals)
         for i in range(0, len(self.intervals),2):
-            #print(i)
-            #print(self.intervals[i+1])
             intervals.append([self.intervals[i], self.intervals[i+1]]) 
         return intervals
         
