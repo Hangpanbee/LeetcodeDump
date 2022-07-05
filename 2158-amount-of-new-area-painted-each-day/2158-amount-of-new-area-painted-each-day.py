@@ -8,7 +8,6 @@ class Solution:
             paints.append((e, END, i))
         
         paints.sort()
-        pi = 0
         active = []
         ans = [0]*len(paint)
         prevp = 0
@@ -16,14 +15,11 @@ class Solution:
             pa, STATUS, i = p
             if active:
                 ans[active[0]] += pa - prevp
-            
             if STATUS == END:
                 while active and pa >= paint[active[0]][1]:
                     heapq.heappop(active)
             elif STATUS == START:
                 heapq.heappush(active, i)
             prevp = pa
-                
 
-                
         return ans
