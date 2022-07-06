@@ -14,6 +14,6 @@ class Solution:
                 if abs(target-nextPos) > target: continue
                 q.append((nextPos, nextSpeed, nextCount))
                 if nextPos == target: return nextCount
-                dp2[nextPos] = nextCount
+          
                 dp[(nextPos, nextSpeed)] = (nextCount)
            
