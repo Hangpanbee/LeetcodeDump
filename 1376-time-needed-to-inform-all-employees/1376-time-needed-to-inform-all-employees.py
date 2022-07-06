@@ -9,7 +9,7 @@ class Solution:
             mapMtoS[m].append(s)
             if m == -1: startTime = informTime[s]
         
-        
+        @lru_cache(None)
         def dfs(curr):
             time = 0
             for s in mapMtoS[curr]:
