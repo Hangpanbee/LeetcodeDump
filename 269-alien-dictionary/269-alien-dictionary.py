@@ -1,69 +1,77 @@
-class dictGraph:
-    def __init__(self):
-        self.graphRep = collections.defaultdict(set)
-        self.seen = {}
-        self.orderedOutput = []
-
+class AlienDictImpl:
+    
+    def __init__(self, words):
+        self.graph = collections.defaultdict(list)
+        self.words = words
+        self.isValid = self.buildGraph()
+        self.finalWord = []
+        self.visited = {}
         
-    def buildGraph(self, words):
-        if len(words) == 1: self.getCharToGraph(words[0])
-        for i in range(len(words)-1):
-            #print(words[i], words[i+1])
-            isValid = self.addWordToGraph(words[i], words[i+1])
-            if not isValid: return {}
-        return True
-            
-    def getCharToGraph(self, w):
-        #print(w)
-        for ch in w:
-            if ch not in self.graphRep:
-                self.graphRep[ch] = set()
-    
-    
-    def addWordToGraph(self, w1, w2):
-        self.getCharToGraph(w1)
-        self.getCharToGraph(w2)
-        for i in zip(w1, w2):
-            if i[0] != i[1]:
-                self.graphRep[i[0]].add(i[1])
+    def buildCharGraph(self, word):
+        for c in word:
+            if c not in self.graph: self.graph[c] = set()
+        
+    def buildOrder(self, word1, word2):
+        self.buildCharGraph(word1)
+        self.buildCharGraph(word2)
+        
+        for c1, c2 in zip(word1, word2):
+            if c1 != c2:
+                self.graph[c1].add(c2)
                 return True
-
-        if len(w1) > len(w2):
+        if len(word1) > len(word2):
             return False
         return True
-
-    def dfs(self, node):
         
-        if node in self.seen:
-            return self.seen[node]
-        self.seen[node] = False
-        for nxtNode in self.graphRep[node]:
-            isCycle = self.dfs(nxtNode)
-            #print(isCycle, node)
-            if not isCycle: return False
         
-        self.orderedOutput.append(node)
-        self.seen[node] = True
-        return self.seen[node]
+    def buildGraph(self):
+        if len(self.words) == 1: self.buildCharGraph(self.words[0])
+        for i in range(len(self.words)-1):
+            isValid = self.buildOrder(self.words[i], self.words[i+1])
+            if not isValid: return False
         
+        return True
+    
+    def buildFinalWord(self, char):
+        
+        self.visited[char] = False
+        # v = {a: False}
+        # v = {a: F, c: F}
+        
+        # a c 
+      
+        isNxtChar = True
+        for nxtChar in self.graph[char]:
+            if nxtChar in self.visited:
+                isNxtChar = self.visited[nxtChar]
+                break
+            isNotCycle = self.buildFinalWord(nxtChar)
+            if not isNotCycle: return False
+        self.finalWord.append(char)
+        self.visited[char] = True
+        # v = {a: True}
+        return isNxtChar
+            
 
 class Solution:
     def alienOrder(self, words: List[str]) -> str:
-   
         
-        DG = dictGraph()
-        isValid = DG.buildGraph(words)
-        #print(isValid, DG.graphRep)
-        if not isValid: return ""
-        #print(DG.graphRep)
+        AlienDict = AlienDictImpl(words)
+        if not AlienDict.isValid: return ""
+        """
+        self.graph = {
+            "c": ["b"],
+            "b": ["a"],
+            "a": []
+        }
         
-        for k, v in DG.graphRep.items():
+        """
+        for char, v in AlienDict.graph.items():
+            if char not in AlienDict.visited:
+                isValid = AlienDict.buildFinalWord(char)
+
+            if not isValid: return ""
+        
+        AlienDict.finalWord.reverse()
+        return "".join(AlienDict.finalWord)
             
-            
-            isCycle = DG.dfs(k)
-                
-            if not isCycle: return ""
-                
-        DG.orderedOutput.reverse()
-        return "".join(DG.orderedOutput)
-        
