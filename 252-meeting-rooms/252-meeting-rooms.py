@@ -3,11 +3,10 @@ class Solution:
         intervals.sort()
         
         lastEnd = -1
-        for interval in intervals:
-            if lastEnd > interval[0]:
+        for start, end in intervals:
+            if lastEnd > start:
                 return False
-            else:
-                lastEnd = interval[1]
+            lastEnd = end
         
         return True
         
