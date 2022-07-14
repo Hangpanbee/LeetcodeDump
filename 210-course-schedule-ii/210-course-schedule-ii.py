@@ -4,11 +4,11 @@ class Solution:
         
         
         inEdge = [0]*numCourses
-        graph = collections.defaultdict(set)
+        #graph = collections.defaultdict(set)
         prereqGraph = collections.defaultdict(set)
         
         for course, prereq in prerequisites:
-            graph[course].add(prereq)
+            #graph[course].add(prereq)
             prereqGraph[prereq].add(course)
             inEdge[course] += 1
         
