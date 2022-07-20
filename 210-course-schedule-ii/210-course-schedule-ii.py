@@ -1,7 +1,6 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        inDegree = [0]*numCourses
-        # nC = 3, prereq = [[1,0],[1,2],[0,1]]
+
         self.graph = collections.defaultdict(set)
   
         for cl, prereq in prerequisites:
