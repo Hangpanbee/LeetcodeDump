@@ -2,27 +2,32 @@ class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         inDegree = [0]*numCourses
         # nC = 3, prereq = [[1,0],[1,2],[0,1]]
-        
-        graph = collections.defaultdict(set)
+        self.graph = collections.defaultdict(set)
+  
         for cl, prereq in prerequisites:
-            inDegree[cl] += 1
-            graph[prereq].add(cl)
+            self.graph[cl].add(prereq)
         #print(inDegree, graph)  
-        """
-            0 -> 1
-            2 -> 1
-        """
-        q = collections.deque()
-        for cl, prereqCount in enumerate(inDegree):
-            if prereqCount == 0:
-                q.append(cl)
-        
-        res = []
-        while q:
-            prereq = q.popleft()
-            res.append(prereq)
+       
+        self.visited = {}
+        self.courses = []
+        for cl in range(numCourses):
+            isValid = self.dfs(cl)
+            if not isValid: return []
             
-            for nxtClass in graph[prereq]:
-                inDegree[nxtClass] -= 1
-                if inDegree[nxtClass] == 0: q.append(nxtClass)
-        return res if len(res) == numCourses else []
+        return self.courses
+            
+            
+    def dfs(self, currCourse):
+        
+        if currCourse in self.visited:
+            return self.visited[currCourse]
+        self.visited[currCourse] = False
+        
+        for nxtClass in self.graph[currCourse]:
+            isNotCyclic = self.dfs(nxtClass)
+            if not isNotCyclic: return False
+        
+        self.courses.append(currCourse)
+        self.visited[currCourse] = True
+        
+        return True
